@@ -1,0 +1,23 @@
+{
+  "url": "https://demo.applitools.com/hackathon.html",
+  "urlwithadd": "https://demo.applitools.com/hackathon.html?showAd=true",
+  "urlV2": "https://demo.applitools.com/hackathonV2.html",
+  "urlwithaddV2": "https://demo.applitools.com/hackathonV2.html?showAd=true",
+  "loginButtonText": "Log In",
+  "twitter": "https://demo.applitools.com/img/social-icons/twitter.png",
+  "facebook": "https://demo.applitools.com/img/social-icons/facebook.png",
+  "linkedin": "https://demo.applitools.com/img/social-icons/linkedin.png",
+  "usernameplaceholder": "Enter your username",
+  "passwordplaceholder": "Enter your password",
+  "usernameplaceholderV2": "John Smith",
+  "passwordplaceholderV2": "ABC$*1@",
+  "usernamepasswordmissing": "Both Username and Password must be present",
+  "usernamepasswordmissingV2": "Please enter both username and password",
+  "usernamemissing": "Username must be present",
+  "passwordmissing": "Password must be present",
+  "username": "test",
+  "password": "test",
+  "flashsale1": "https://demo.applitools.com/img/flashSale.gif",
+  "flashsale2": "https://demo.applitools.com/img/flashSale2.gif",
+  "flashsale3": "https://demo.applitools.com/img/flaseSale3.gif"
+}
