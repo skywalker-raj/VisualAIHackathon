@@ -22,7 +22,8 @@
 	b. Run Visual AI Test from VisualAITest.cs file under  Test folder 
 
 	
-	#Architecture
+#Architecture
+
 1. Services
 	This folder contains all the generic selenium/browser communication methods customized for the framework.
 2. PageObjects
@@ -34,4 +35,7 @@
 5. Test	
 	This folder contains the main test. Legacy test or test using only selenium are under TraditionalTest.cs.
 	Whereas all the verification via Applitools are under VisualAITest.
-6. config.json file consist all the data like url, messages , username ,pwd etc.
+6. Data
+	The folder consist config.json file which contains the data like url, messages , username ,pwd etc.
+7. Executables
+	The folder contains the .exe files i.e. ChromeDriver in this case.

@@ -1,4 +1,4 @@
-﻿namespace TraditionalTests.Data_Classes
+﻿namespace HackathonRockstar.Data_Classes
 {
     public class Transaction
     {

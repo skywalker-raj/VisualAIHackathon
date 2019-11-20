@@ -10,7 +10,7 @@ namespace HackathonRockstar.Common
     {
         #region Public Properties
 
-        public static readonly IConfiguration Config = new ConfigurationBuilder().AddJsonFile("config.json").Build();
+        public static readonly IConfiguration Config = new ConfigurationBuilder().AddJsonFile(@"Data/config.json").Build();
 
         #endregion
 

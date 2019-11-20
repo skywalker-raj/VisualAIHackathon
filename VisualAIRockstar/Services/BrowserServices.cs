@@ -9,7 +9,8 @@ namespace HackathonRockstar.Services
     {
         #region Public properties
 
-        public static readonly IWebDriver WebDriver = new ChromeDriver("./");
+        public static readonly IWebDriver WebDriver = new ChromeDriver(@"Executables/");
+        //new ChromeDriver("./");
         
         #endregion
 

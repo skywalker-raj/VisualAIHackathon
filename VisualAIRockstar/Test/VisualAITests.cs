@@ -1,13 +1,13 @@
-﻿using Applitools;
+﻿using System;
+using Applitools;
 using Applitools.Selenium;
 using Applitools.Utils.Geometry;
-using NUnit.Framework;
 using HackathonRockstar.Common;
 using HackathonRockstar.PageObject;
 using HackathonRockstar.Services;
-using static System.String;
+using NUnit.Framework;
 
-namespace HackathonRockstar
+namespace HackathonRockstar.Test
 {
     [TestFixture]
     public class VisualAITests
@@ -66,9 +66,9 @@ namespace HackathonRockstar
             //Start the test by setting AUT's name, window or the page name that's being tested, viewport width and height
             _eyes.Open(BrowserServices.WebDriver, "Hackathan App", "Login Page Verification", new RectangleSize(1366, 728));
             //Navigate the browser to the "ACME" demo app. To see visual bugs after the first run, use the commented line below instead.
-            BrowserServices.WebDriver.Url = CommonMethods.Config["url"];
+            //BrowserServices.WebDriver.Url = CommonMethods.Config["url"];
             //Url navigation for V2 app.
-            //BrowserServices.WebDriver.Url = CommonMethods.Config["urlV2"];
+            BrowserServices.WebDriver.Url = CommonMethods.Config["urlV2"];
             //Visual checkpoint #1 - Check the login page.
             _eyes.CheckWindow("Login Page"); 
             //End the test.
@@ -89,22 +89,22 @@ namespace HackathonRockstar
             //Visual checkpoint #1 - Check the username and Password misssing message.
             _eyes.CheckWindow("Username & Password Missing");
             //Enter Username
-            BrowserServices.EnterValueInTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"), CommonMethods.Config["username"]);
+            BrowserServices.EnterValueInTextBox("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"), CommonMethods.Config["username"]);
             //Click Login Button
             CommonMethods.ClickLoginButton();
             //Visual checkpoint #2 - Check the username missing message.
             _eyes.CheckWindow("Password Missing");
             //Clear Username
-            BrowserServices.ClearTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"));
+            BrowserServices.ClearTextBox("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"));
             //Enter Password
-            BrowserServices.EnterValueInTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Password"), CommonMethods.Config["password"]);
+            BrowserServices.EnterValueInTextBox("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Password"), CommonMethods.Config["password"]);
             //CommonMethods.EnterValueInTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Pwds"), CommonMethods.Config["password"]);
             //Click Login Button
             CommonMethods.ClickLoginButton();
             //Visual checkpoint #3 - Check the password missing message.
             _eyes.CheckWindow("Username Missing");
             //Enter Username
-            BrowserServices.EnterValueInTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"), CommonMethods.Config["username"]);
+            BrowserServices.EnterValueInTextBox("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"), CommonMethods.Config["username"]);
             //Click Login Button
             CommonMethods.ClickLoginButton();
             //Visual checkpoint #3 - Check the password missing message.
