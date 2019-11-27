@@ -7,6 +7,7 @@ using HackathonRockstar.PageObject;
 using HackathonRockstar.Services;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using static System.String;
 
 namespace HackathonRockstar.Test
 {     
@@ -53,15 +54,15 @@ namespace HackathonRockstar.Test
                         : $"Login Form Header has been changed to {title}";
                     Console.Out.WriteLine(headermsg);
                 }
-                Assert.True(BrowserServices.IsElementPresent("XPath", String.Format(LoginPageObjects.LoginFormLabelXPath, "Username")), "Username Label Should be present.");
-                if (BrowserServices.IsElementPresent("XPath", String.Format(LoginPageObjects.LoginFormLabelXPath, "Password")))
+                Assert.True(BrowserServices.IsElementPresent("XPath", Format(LoginPageObjects.LoginFormLabelXPath, "Username")), "Username Label Should be present.");
+                if (BrowserServices.IsElementPresent("XPath", Format(LoginPageObjects.LoginFormLabelXPath, "Password")))
                 {
                     Console.Out.WriteLine("Password Label Should be present.");
                 }
                 else
                 {
                     //Password Label Changed to Pwd
-                    Assert.True(BrowserServices.IsElementPresent("XPath", String.Format(LoginPageObjects.LoginFormLabelXPath, "Pwd")), "Password Label Should be changed for V2 app.");
+                    Assert.True(BrowserServices.IsElementPresent("XPath", Format(LoginPageObjects.LoginFormLabelXPath, "Pwd")), "Password Label Should be changed for V2 app.");
                 }
                 var userIconmsg = BrowserServices.IsElementPresent("CssSelector", LoginPageObjects.UserIconCssSelector)
                     ? "Username Icon Should be present."
@@ -71,51 +72,51 @@ namespace HackathonRockstar.Test
                     ? "Password Icon Should be present."
                     : "Password Icon Should be removed in V2 app.";
                 Console.Out.WriteLine(passwordIconmsg);
-                Assert.True(BrowserServices.IsElementPresent("XPath", String.Format(LoginPageObjects.LoginFormLabelXPath, "Remember Me")), "Remember Me Label Should be present.");
+                Assert.True(BrowserServices.IsElementPresent("XPath", Format(LoginPageObjects.LoginFormLabelXPath, "Remember Me")), "Remember Me Label Should be present.");
                 Assert.True(BrowserServices.IsElementPresent("CssSelector", LoginPageObjects.RememberMeCheckBoxCssSelector), "Remember Me Checkbox Should be present.");
-                Assert.True(BrowserServices.IsElementPresent("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Username")), "Username Textbox Should be present.");
+                Assert.True(BrowserServices.IsElementPresent("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Username")), "Username Textbox Should be present.");
                 var usernameplaceholder = BrowserServices.GetAttribute("XPath",
-                    String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"), "placeholder");
+                    Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"), "placeholder");
                 var usernameplaceholdermsg = usernameplaceholder == CommonMethods.Config["usernameplaceholder"]
                     ? "Placeholder should contain msg prompting for username."
                     : $"Placeholder should contain username {usernameplaceholder} in V2 app.";
                 Console.Out.WriteLine(usernameplaceholdermsg);
-                if (BrowserServices.IsElementPresent("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Password")))
+                if (BrowserServices.IsElementPresent("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Password")))
                 {
                     Console.Out.WriteLine("Password Textbox Should be present.");
-                    Assert.Equals(BrowserServices.GetAttribute("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Password"), "placeholder"), CommonMethods.Config["passwordplaceholder"]);
+                    Assert.Equals(BrowserServices.GetAttribute("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Password"), "placeholder"), CommonMethods.Config["passwordplaceholder"]);
                 }
                 else
                 {
-                    Assert.True(BrowserServices.IsElementPresent("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Pwd")), "Password Textbox Should be present.");
-                    Assert.AreEqual(BrowserServices.GetAttribute("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Pwd"), "placeholder"), CommonMethods.Config["passwordplaceholderV2"]);
+                    Assert.True(BrowserServices.IsElementPresent("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Pwd")), "Password Textbox Should be present.");
+                    Assert.AreEqual(BrowserServices.GetAttribute("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Pwd"), "placeholder"), CommonMethods.Config["passwordplaceholderV2"]);
                     Console.Out.WriteLine("Password Label Should be changed to Pwd in V2 app.");
                 }
                 Assert.True(BrowserServices.IsElementPresent("CssSelector", LoginPageObjects.LoginButtonCssSelector), "Login button Should be present.");
-                Assert.AreEqual(BrowserServices.GetElementText("CssSelector", LoginPageObjects.LoginButtonCssSelector), CommonMethods.Config["loginButtonText"], String.Format("Login button Should have text {0}", CommonMethods.Config["loginButtonText"]));
+                Assert.AreEqual(BrowserServices.GetElementText("CssSelector", LoginPageObjects.LoginButtonCssSelector), CommonMethods.Config["loginButtonText"], Format("Login button Should have text {0}", CommonMethods.Config["loginButtonText"]));
                 //Opend Id locator changed              
-                if (BrowserServices.IsElementPresent("CssSelector", String.Format(LoginPageObjects.OpenIdLoginCssSelector, 1)))
+                if (BrowserServices.IsElementPresent("CssSelector", Format(LoginPageObjects.OpenIdLoginCssSelector, 1)))
                 {
-                    Assert.AreEqual(CommonMethods.Config["twitter"], BrowserServices.GetAttribute("CssSelector", String.Format(LoginPageObjects.OpenIdLoginCssSelector, 1), "src"));
+                    Assert.AreEqual(CommonMethods.Config["twitter"], BrowserServices.GetAttribute("CssSelector", Format(LoginPageObjects.OpenIdLoginCssSelector, 1), "src"));
                     Console.Out.WriteLine("Twitter OpenId Login should be present.");
                 }
                 else
                 {
-                    Assert.AreEqual(CommonMethods.Config["twitter"], BrowserServices.GetAttribute("CssSelector", String.Format(LoginPageObjects.OpenIdLoginV2CssSelector, 1), "src"));
+                    Assert.AreEqual(CommonMethods.Config["twitter"], BrowserServices.GetAttribute("CssSelector", Format(LoginPageObjects.OpenIdLoginV2CssSelector, 1), "src"));
                     Console.Out.WriteLine("CssSelector for OpenIdLogin for twitter Should be changed.");
                 }
-                if (BrowserServices.IsElementPresent("CssSelector", String.Format(LoginPageObjects.OpenIdLoginCssSelector, 2)))
+                if (BrowserServices.IsElementPresent("CssSelector", Format(LoginPageObjects.OpenIdLoginCssSelector, 2)))
                 {
-                    Assert.AreEqual(CommonMethods.Config["facebook"], BrowserServices.GetAttribute("CssSelector", String.Format(LoginPageObjects.OpenIdLoginCssSelector, 2), "src"));
+                    Assert.AreEqual(CommonMethods.Config["facebook"], BrowserServices.GetAttribute("CssSelector", Format(LoginPageObjects.OpenIdLoginCssSelector, 2), "src"));
                     Console.Out.WriteLine("Facebook OpenId Login should be present.");
                 }
                 else
                 {
-                    Assert.AreEqual(CommonMethods.Config["facebook"], BrowserServices.GetAttribute("CssSelector", String.Format(LoginPageObjects.OpenIdLoginV2CssSelector, 2), "src"));
+                    Assert.AreEqual(CommonMethods.Config["facebook"], BrowserServices.GetAttribute("CssSelector", Format(LoginPageObjects.OpenIdLoginV2CssSelector, 2), "src"));
                     Console.Out.WriteLine("CssSelector for OpenIdLogin for facebook Should be changed.");
                 }
-                var linkedInmsg = BrowserServices.IsElementPresent("CssSelector", String.Format(LoginPageObjects.OpenIdLoginCssSelector, 3))
-                    ? BrowserServices.GetAttribute("CssSelector", String.Format(LoginPageObjects.OpenIdLoginCssSelector, 3), "src")
+                var linkedInmsg = BrowserServices.IsElementPresent("CssSelector", Format(LoginPageObjects.OpenIdLoginCssSelector, 3))
+                    ? BrowserServices.GetAttribute("CssSelector", Format(LoginPageObjects.OpenIdLoginCssSelector, 3), "src")
                     : "LinkedIn OpenId Login Should be removed in V2 app.";
                 Console.Out.WriteLine(linkedInmsg);
             }
@@ -144,7 +145,7 @@ namespace HackathonRockstar.Test
                     Console.Out.WriteLine("Error message for username password missing should be changed for V2 app.");
                 }
                 //Verifying error message for no paswword
-                BrowserServices.EnterValueInTextBox("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"), CommonMethods.Config["username"]);
+                BrowserServices.EnterValueInTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"), CommonMethods.Config["username"]);
                 CommonMethods.ClickLoginButton(); ;
                 Assert.AreEqual(BrowserServices.GetElementText("CssSelector", LoginPageObjects.ErrorMessageCssSelector), CommonMethods.Config["passwordmissing"]);
                 //Password missing message is hidden because of the z-index
@@ -153,15 +154,15 @@ namespace HackathonRockstar.Test
                     Console.Out.WriteLine("Password missing message should be hidden because of z index in V2 app.");
                 }
                 //Verifying error message for no username
-                BrowserServices.ClearTextBox("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"));
+                BrowserServices.ClearTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"));
                 //Password Label Changed to Pwd
-                if (BrowserServices.IsElementPresent("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Password")))
+                if (BrowserServices.IsElementPresent("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Password")))
                 {
-                    BrowserServices.EnterValueInTextBox("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Password"), CommonMethods.Config["password"]);                    
+                    BrowserServices.EnterValueInTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Password"), CommonMethods.Config["password"]);                    
                 }
                 else
                 {
-                    BrowserServices.EnterValueInTextBox("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Pwd"), CommonMethods.Config["password"]);
+                    BrowserServices.EnterValueInTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Pwd"), CommonMethods.Config["password"]);
                     Console.Out.WriteLine("Password label should be changed to Pwd in V2 app.");
                 }
                 CommonMethods.ClickLoginButton();
@@ -200,11 +201,11 @@ namespace HackathonRockstar.Test
                 ////Extracting values from transaction grid
                 for (int i = 1; i <= row; i++)
                 {
-                    oldstatusList.Add(BrowserServices.GetElementText("CssSelector", String.Format(DashboardPageObject.StatusValueCssSelector, i)));
-                    olddescriptionList.Add(BrowserServices.GetElementText("CssSelector", String.Format(DashboardPageObject.DescriptionValueCssSelector, i)));
-                    oldcategoryList.Add(BrowserServices.GetElementText("CssSelector", String.Format(DashboardPageObject.CategoryValueCssSelector, i)));
-                    oldamountList.Add(BrowserServices.GetElementText("CssSelector", String.Format(DashboardPageObject.AmountValueCssSelector, i)));
-                    IList<IWebElement> dateList = BrowserServices.FindElements("CssSelector", String.Format(DashboardPageObject.DateValueCssSelector, i));
+                    oldstatusList.Add(BrowserServices.GetElementText("CssSelector", Format(DashboardPageObject.StatusValueCssSelector, i)));
+                    olddescriptionList.Add(BrowserServices.GetElementText("CssSelector", Format(DashboardPageObject.DescriptionValueCssSelector, i)));
+                    oldcategoryList.Add(BrowserServices.GetElementText("CssSelector", Format(DashboardPageObject.CategoryValueCssSelector, i)));
+                    oldamountList.Add(BrowserServices.GetElementText("CssSelector", Format(DashboardPageObject.AmountValueCssSelector, i)));
+                    IList<IWebElement> dateList = BrowserServices.FindElements("CssSelector", Format(DashboardPageObject.DateValueCssSelector, i));
                     foreach (IWebElement date in dateList)
                     {
                         dateValue += date.Text;
@@ -219,11 +220,11 @@ namespace HackathonRockstar.Test
                 //Extracting new values from transaction grid
                 for (int i = 1; i <= row; i++)
                 {
-                    newstatusList.Add(BrowserServices.GetElementText("CssSelector", String.Format(DashboardPageObject.StatusValueCssSelector, i)));
-                    newdescriptionList.Add(BrowserServices.GetElementText("CssSelector", String.Format(DashboardPageObject.DescriptionValueCssSelector, i)));
-                    newcategoryList.Add(BrowserServices.GetElementText("CssSelector", String.Format(DashboardPageObject.CategoryValueCssSelector, i)));
-                    newamountList.Add(BrowserServices.GetElementText("CssSelector", String.Format(DashboardPageObject.AmountValueCssSelector, i)));
-                    IList<IWebElement> dateList = BrowserServices.FindElements("CssSelector", String.Format(DashboardPageObject.DateValueCssSelector, i));
+                    newstatusList.Add(BrowserServices.GetElementText("CssSelector", Format(DashboardPageObject.StatusValueCssSelector, i)));
+                    newdescriptionList.Add(BrowserServices.GetElementText("CssSelector", Format(DashboardPageObject.DescriptionValueCssSelector, i)));
+                    newcategoryList.Add(BrowserServices.GetElementText("CssSelector", Format(DashboardPageObject.CategoryValueCssSelector, i)));
+                    newamountList.Add(BrowserServices.GetElementText("CssSelector", Format(DashboardPageObject.AmountValueCssSelector, i)));
+                    IList<IWebElement> dateList = BrowserServices.FindElements("CssSelector", Format(DashboardPageObject.DateValueCssSelector, i));
                     foreach (IWebElement date in dateList)
                     {
                         dateValue += date.Text;
@@ -293,21 +294,21 @@ namespace HackathonRockstar.Test
                 Assert.True(BrowserServices.IsElementPresent("CssSelector", DashboardPageObject.CompareExpenseCssSelector), "Compare Expense Link should be present after the login.");
                 //Verifying for the Flash Sale gif
                 //FlashSale Gif is not present in V2
-                if (BrowserServices.IsElementPresent("CssSelector", String.Format(DashboardPageObject.FlashSalesCssSelector, "2")))
+                if (BrowserServices.IsElementPresent("CssSelector", Format(DashboardPageObject.FlashSalesCssSelector, "2")))
                 {
-                    Assert.AreEqual(BrowserServices.GetAttribute("CssSelector", String.Format(DashboardPageObject.FlashSalesCssSelector, "2"), "src"), CommonMethods.Config["flashsale1"]);
+                    Assert.AreEqual(BrowserServices.GetAttribute("CssSelector", Format(DashboardPageObject.FlashSalesCssSelector, "2"), "src"), CommonMethods.Config["flashsale1"]);
                 }
                 else
                 {
-                    Assert.False(BrowserServices.IsElementPresent("CssSelector", String.Format(DashboardPageObject.FlashSalesCssSelector, "2")), "Flash Sale gif is not present.");
+                    Assert.False(BrowserServices.IsElementPresent("CssSelector", Format(DashboardPageObject.FlashSalesCssSelector, "2")), "Flash Sale gif is not present.");
                     Console.Out.WriteLine("Flash Sale gif should be removed in V2 app.");
                 }
                 //FlashSale2 Gif is changed in V2
-                if (BrowserServices.GetAttribute("CssSelector", String.Format(DashboardPageObject.FlashSalesCssSelector, "4"), "src") == CommonMethods.Config["flashsale2"])
+                if (BrowserServices.GetAttribute("CssSelector", Format(DashboardPageObject.FlashSalesCssSelector, "4"), "src") == CommonMethods.Config["flashsale2"])
                 {
                     Console.Out.WriteLine("Flash Sale2 gif should be present.");
                 }
-                else if (BrowserServices.GetAttribute("CssSelector", String.Format(DashboardPageObject.FlashSalesCssSelector, "4"), "src") == CommonMethods.Config["flashsale3"])
+                else if (BrowserServices.GetAttribute("CssSelector", Format(DashboardPageObject.FlashSalesCssSelector, "4"), "src") == CommonMethods.Config["flashsale3"])
                 {
                     Console.Out.WriteLine("Flash Sale gif should be changed in V2 app.");
                 }                                

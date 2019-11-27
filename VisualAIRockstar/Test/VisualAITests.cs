@@ -6,6 +6,8 @@ using HackathonRockstar.Common;
 using HackathonRockstar.PageObject;
 using HackathonRockstar.Services;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using static System.String;
 
 namespace HackathonRockstar.Test
 {
@@ -16,6 +18,7 @@ namespace HackathonRockstar.Test
 
         private EyesRunner _runner;
         private Eyes _eyes;
+        private readonly IWebDriver _driver = BrowserServices.WebDriver;
         private const string Key = "V2SMURpRxCrei1faWBlDfjIowbQ5Vu98Xy101cn6105lQWc110";
         private BatchInfo _batchInfo;
 
@@ -48,8 +51,14 @@ namespace HackathonRockstar.Test
         [TearDown]
         public  void AfterEach()
         {
+                       
+        }
+
+        [OneTimeTearDown]
+        public void AfterTestSuite()
+        {
             // Close the browser.
-            BrowserServices.WebDriver.Quit();
+            _driver.Quit();
             // If the test was aborted before eyes.close was called, ends the test as aborted.
             _eyes.AbortIfNotClosed();
             //Wait and collect all test results
@@ -64,11 +73,11 @@ namespace HackathonRockstar.Test
         public void Verify_Login_Page()
         {
             //Start the test by setting AUT's name, window or the page name that's being tested, viewport width and height
-            _eyes.Open(BrowserServices.WebDriver, "Hackathan App", "Login Page Verification", new RectangleSize(1366, 728));
+            _eyes.Open(_driver, "Hackathan App", "Login Page Verification", new RectangleSize(1366, 728));
             //Navigate the browser to the "ACME" demo app. To see visual bugs after the first run, use the commented line below instead.
-            //BrowserServices.WebDriver.Url = CommonMethods.Config["url"];
+            //_driver.Url = CommonMethods.Config["url"];
             //Url navigation for V2 app.
-            BrowserServices.WebDriver.Url = CommonMethods.Config["urlV2"];
+            _driver.Url = CommonMethods.Config["urlV2"];
             //Visual checkpoint #1 - Check the login page.
             _eyes.CheckWindow("Login Page"); 
             //End the test.
@@ -79,11 +88,11 @@ namespace HackathonRockstar.Test
         public void Verify_Login_Functionality()
         {
             //Start the test by setting AUT's name, window or the page name that's being tested, viewport width and height
-            _eyes.Open(BrowserServices.WebDriver, "Hackathan App", "Login Functionality Verification", new RectangleSize(1366, 728));
+            _eyes.Open(_driver, "Hackathan App", "Login Functionality Verification", new RectangleSize(1366, 728));
             //Navigate the browser to the "ACME" demo app. To see visual bugs after the first run, use the commented line below instead.
-            BrowserServices.WebDriver.Url = CommonMethods.Config["url"];
+            //_driver.Url = CommonMethods.Config["url"];
             //Url navigation for V2 app.
-            //BrowserServices.WebDriver.Url = CommonMethods.Config["urlV2"];
+            _driver.Url = CommonMethods.Config["urlV2"];
             //Click Login Button
             CommonMethods.ClickLoginButton();
             //Visual checkpoint #1 - Check the username and Password misssing message.
@@ -97,8 +106,15 @@ namespace HackathonRockstar.Test
             //Clear Username
             BrowserServices.ClearTextBox("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Username"));
             //Enter Password
-            BrowserServices.EnterValueInTextBox("XPath", String.Format(LoginPageObjects.LoginFormTextBoxXPath, "Password"), CommonMethods.Config["password"]);
-            //CommonMethods.EnterValueInTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Pwds"), CommonMethods.Config["password"]);
+            if (BrowserServices.IsElementPresent("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Password")))
+            {
+                BrowserServices.EnterValueInTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Password"), CommonMethods.Config["password"]);
+            }
+            else
+            {
+                BrowserServices.EnterValueInTextBox("XPath", Format(LoginPageObjects.LoginFormTextBoxXPath, "Pwd"), CommonMethods.Config["password"]);
+                Console.Out.WriteLine("Password label should be changed to Pwd in V2 app.");
+            }
             //Click Login Button
             CommonMethods.ClickLoginButton();
             //Visual checkpoint #3 - Check the password missing message.
@@ -117,11 +133,11 @@ namespace HackathonRockstar.Test
         public void Verify_Table_Sort()
         {
             // Start the test by setting AUT's name, window or the page name that's being tested, viewport width and height
-            _eyes.Open(BrowserServices.WebDriver, "Hackathan App", "Table Sort", new RectangleSize(1366, 728));
+            _eyes.Open(_driver, "Hackathan App", "Table Sort", new RectangleSize(1366, 728));
             // Navigate the browser to the "ACME" demo app. To see visual bugs after the first run, use the commented line below instead.
-            BrowserServices.WebDriver.Url = CommonMethods.Config["url"];
+            //_driver.Url = CommonMethods.Config["url"];
             //Url navigation for V2 app.
-            //BrowserServices.WebDriver.Url = CommonMethods.Config["urlV2"];
+            _driver.Url = CommonMethods.Config["urlV2"];
             //Login 
             CommonMethods.Login(CommonMethods.Config["username"], CommonMethods.Config["password"]);
             // Visual checkpoint #1 - Check the app page.
@@ -138,11 +154,11 @@ namespace HackathonRockstar.Test
         public void Verify_Compare_Expense_Chart()
         {
             // Start the test by setting AUT's name, window or the page name that's being tested, viewport width and height
-            _eyes.Open(BrowserServices.WebDriver, "Hackathan App", "Canvas Chart", new RectangleSize(1366, 728));
+            _eyes.Open(_driver, "Hackathan App", "Canvas Chart", new RectangleSize(1366, 728));
             // Navigate the browser to the "ACME" demo app. To see visual bugs after the first run, use the commented line below instead.
-            BrowserServices.WebDriver.Url = CommonMethods.Config["url"];
+            //_driver.Url = CommonMethods.Config["url"];
             //Url navigation for V2 app.
-            //BrowserServices.WebDriver.Url = CommonMethods.Config["urlV2"];
+            _driver.Url = CommonMethods.Config["urlV2"];
             //Login 
             CommonMethods.Login(CommonMethods.Config["username"], CommonMethods.Config["password"]);
             Assert.True(BrowserServices.IsElementPresent("CssSelector", DashboardPageObject.CompareExpenseCssSelector), "Compare Expense Link should be present after the login.");
@@ -162,11 +178,11 @@ namespace HackathonRockstar.Test
         public void Verify_Dynamic_Content()
         {
             // Start the test by setting AUT's name, window or the page name that's being tested, viewport width and height
-            _eyes.Open(BrowserServices.WebDriver, "Hackathan App", "Dynamic Content", new RectangleSize(1366, 728));
+            _eyes.Open(_driver, "Hackathan App", "Dynamic Content", new RectangleSize(1366, 728));
             // Navigate the browser to the "ACME" demo app. To see visual bugs after the first run, use the commented line below instead.
-            BrowserServices.WebDriver.Url = CommonMethods.Config["urlwithadd"];
+            //_driver.Url = CommonMethods.Config["urlwithadd"];
             //Url navigation for V2 app.
-            //BrowserServices.WebDriver.Url = CommonMethods.Config["urlwithaddV2"];
+            _driver.Url = CommonMethods.Config["urlwithaddV2"];
             //Login 
             CommonMethods.Login(CommonMethods.Config["username"], CommonMethods.Config["password"]);
             // Visual checkpoint #1 - Check the app page.
